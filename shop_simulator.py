@@ -73,8 +73,6 @@ class ShoppingCart:
                 if item.product.id == product_id:
                     item.quantity += quantity
                     return True
-
-            # Если товара нет, добавляем новый
             self.items.append(CartItem(product, quantity))
             return True
         return False
@@ -88,19 +86,16 @@ class ShoppingCart:
                 print(f"{item.product.name} x {item.quantity} = ${item.get_total_price()}")
 
     def get_items_for_sorting(self):
-        """Возвращает список товаров для сортировки"""
         return self.items.copy()
 
 class SortingAlgorithms:
     @staticmethod
     def quick_sort(items, key='price', reverse=False):
-        """Быстрая сортировка"""
         if len(items) <= 1:
             return items
 
         pivot = items[len(items) // 2]
 
-        # Получаем значение опорного элемента
         if key == 'price':
             pivot_val = pivot.product.price
         elif key == 'weight':
@@ -115,7 +110,6 @@ class SortingAlgorithms:
         right = []
 
         for item in items:
-            # Получаем значение текущего элемента
             if key == 'price':
                 item_val = item.product.price
             elif key == 'weight':
@@ -139,7 +133,6 @@ class SortingAlgorithms:
 
     @staticmethod
     def merge_sort(items, key='price', reverse=False):
-        """Сортировка слиянием"""
         if len(items) <= 1:
             return items
 
@@ -155,7 +148,6 @@ class SortingAlgorithms:
         i = j = 0
 
         while i < len(left) and j < len(right):
-            # Получаем значения для сравнения
             if key == 'price':
                 left_val = left[i].product.price
                 right_val = right[j].product.price
@@ -190,7 +182,6 @@ class SortingAlgorithms:
 
 catalog = ProductCatalog()
 
-# Добавление продуктов в каталог
 catalog.add_product("Яблоки", "Фрукты", 1.2, 100)
 catalog.add_product("Бананы", "Фрукты", 0.5, 120)
 catalog.add_product("Молоко", "Напитки", 1.5, 1000)
@@ -198,10 +189,8 @@ catalog.add_product("Хлеб", "Выпечка", 0.8, 500)
 catalog.add_product("Сыр", "Молочные", 3.0, 200)
 catalog.add_product("Вода", "Напитки", 0.5, 1500)
 
-# Создание корзины покупок
 cart = ShoppingCart(catalog)
 
-# Добавление продуктов в корзину
 cart.add_to_cart(1, 3)  # 3 единицы Яблок
 cart.add_to_cart(2, 2)  # 2 единицы Бананов
 cart.add_to_cart(3, 1)  # 1 единица Молока
@@ -209,7 +198,7 @@ cart.add_to_cart(4, 1)  # 1 единица Хлеба
 cart.add_to_cart(5, 2)  # 2 единицы Сыра
 cart.add_to_cart(6, 4)  # 4 единицы Воды
 
-# Вывод содержимого корзины до сортировки
 print("=== КОРЗИНА ДО СОРТИРОВКИ ===")
 cart.display_cart()
+
 
